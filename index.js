@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var port =  process.env.port|| 4200;
+var port =  process.env.PORT|| 4200;
 var cors = require('cors');
 var bodyParser = require('body-parser');
 
