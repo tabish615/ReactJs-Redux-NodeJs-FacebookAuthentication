@@ -3,7 +3,7 @@ var app = express();
 var itemRouter = express.Router();
 
 itemRouter.route('/').get(function (req, res) {
-    console.log(req.headers);
+    console.log(req.headers.asd);
     // res.send(JSON.stringify(req))
     res.send("asd................")
 });
