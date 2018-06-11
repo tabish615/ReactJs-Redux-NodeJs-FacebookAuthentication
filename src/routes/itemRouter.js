@@ -12,6 +12,9 @@ itemRouter.route('/').get(function (req, res) {
         console.log(a)
         axios.get(`https:// graph.facebook.com/debug_tokeninput_token=${req.headers.asd}&access_token=${a.access_token}`).then((e)=>{
             console.log(e)
+        }).catch((s)=>{
+            console.log(s)
+            
         })
     })
         .catch(err => console.log(err))
