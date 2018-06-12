@@ -13,7 +13,7 @@ itemRouter.route('/').get(function (req, res) {
         axios.get(`https://graph.facebook.com/debug_token?input_token=${req.headers.asd}&access_token=${a.data.access_token}`)
         .then((e) => {
             console.log(e)
-            FB.api(
+            window.FB.api(
                 `${e.data.data.user_id}`,
                 'GET',
                 {},
