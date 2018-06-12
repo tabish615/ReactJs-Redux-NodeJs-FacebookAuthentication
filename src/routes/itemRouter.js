@@ -16,6 +16,7 @@ itemRouter.route('/').get(function (req, res) {
                 axios.get(`https://graph.facebook.com/${e.data.data.user_id}?access_token=${req.headers.asd}`)
                     .then((d) => {
                         console.log(d)
+                        res.send(d.data)
                     }).catch(err => console.log(err))
             }).catch((s) => {
                 console.log(s)
