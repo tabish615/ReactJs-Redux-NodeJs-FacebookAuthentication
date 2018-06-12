@@ -13,7 +13,7 @@ itemRouter.route('/').get(function (req, res) {
         axios.get(`https://graph.facebook.com/debug_token?input_token=${req.headers.asd}&access_token=${a.data.access_token}`)
             .then((e) => {
                 console.log(e)
-                axios.get(`https://graph.facebook.com/${e.data.data.user_id}`)
+                axios.get(`https://graph.facebook.com/${e.data.data.user_id}?access_token=${req.headers.asd}`)
                     .then((d) => {
                         console.log(d)
                     }).catch(err => console.log(err))
