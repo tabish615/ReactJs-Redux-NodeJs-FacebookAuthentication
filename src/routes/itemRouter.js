@@ -10,11 +10,19 @@ itemRouter.route('/').get(function (req, res) {
     axios.get(`https://graph.facebook.com/oauth/access_token?client_id=232064780897684&client_secret=3f93548590d82c2e8c93f02929436801&grant_type=client_credentials`,
     ).then(function (a) {
         console.log(a)
-        axios.get(`https://graph.facebook.com/debug_token?input_token=${req.headers.asd}&access_token=${a.data.access_token}`).then((e)=>{
+        axios.get(`https://graph.facebook.com/debug_token?input_token=${req.headers.asd}&access_token=${a.data.access_token}`)
+        .then((e) => {
             console.log(e)
-        }).catch((s)=>{
+            FB.api(
+                `${e.data.data.user_id}`,
+                'GET',
+                {},
+                function(response) {
+                    console.log(response)
+                }
+            );
+        }).catch((s) => {
             console.log(s)
-            
         })
     })
         .catch(err => console.log(err))
