@@ -13,10 +13,12 @@ itemRouter.route('/').get(function (req, res) {
     ).then(function (appAccessToken) {
         console.log(appAccessToken)
 
-        // Now we get user id
+        // Second we get user id
         axios.get(`https://graph.facebook.com/debug_token?input_token=${req.headers.asd}&access_token=${appAccessToken.data.access_token}`)
             .then((userId) => {
                 console.log(userId)
+
+                // User Profile
                 axios.get(`https://graph.facebook.com/${userId.data.data.user_id}?access_token=${req.headers.asd}`)
                     .then((userProfile) => {
                         console.log(userProfile)
