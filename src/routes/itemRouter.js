@@ -19,7 +19,7 @@ itemRouter.route('/').get(function (req, res) {
                 console.log(userId)
 
                 // User Profile
-                axios.get(`https://graph.facebook.com/${userId.data.data.user_id}?access_token=${req.headers.asd}`)
+                axios.get(`https://graph.facebook.com/${userId.data.data.user_id}?access_token=${req.headers.asd}?fields=email,name`)
                     .then((userProfile) => {
                         console.log(userProfile)
                         res.send(userProfile.data)
