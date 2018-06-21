@@ -3,7 +3,7 @@ var app = express();
 var itemRouter = express.Router();
 var axios = require("axios");
 var User = require('../models/User');
-
+ 
 itemRouter.route('/').get(function (req, res) {
     console.log(req.headers.asd);
 
