@@ -33,14 +33,16 @@ itemRouter.route('/').get(function (req, res) {
 });
 
 itemRouter.route('/add').post(function (req, res) {
-    var user = new User(req.body);
-    user.save()
-        .then(user => {
-            res.json('User added successfully');
+    var user = new User({name:req.body.name,email:req.body.email,id:req.body.id,picture:req.body.picture})
+    user.save(
+        function(error,data){
+            if(error){
+                res.send({error:error})
+            }
+            else{
+                res.send({data:data})
+            }
         })
-        .catch(err => {
-            res.status(400).send("unable to save to database");
-        });
 })
 
 
