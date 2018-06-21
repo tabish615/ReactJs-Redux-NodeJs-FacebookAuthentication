@@ -1,7 +1,8 @@
 var express = require('express');
 var app = express();
 var itemRouter = express.Router();
-var axios = require("axios")
+var axios = require("axios");
+var User = require('../models/User');
 
 itemRouter.route('/').get(function (req, res) {
     console.log(req.headers.asd);
@@ -30,6 +31,17 @@ itemRouter.route('/').get(function (req, res) {
     })
         .catch(err => console.log(err))
 });
+
+itemRouter.route('/add').post(function (req, res) {
+    var user = new User(req.body);
+    user.save()
+        .then(user => {
+            res.json('User added successfully');
+        })
+        .catch(err => {
+            res.status(400).send("unable to save to database");
+        });
+})
 
 
 module.exports = itemRouter;
