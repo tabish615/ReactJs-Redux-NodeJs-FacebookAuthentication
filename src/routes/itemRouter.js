@@ -34,6 +34,7 @@ itemRouter.route('/').get(function (req, res) {
 
 itemRouter.route('/add').post(function (req, res) {
     var user = new User({name:req.body.name,email:req.body.email,id:req.body.id,picture:req.body.picture})
+   console.log(req, 'kuch');
     user.save(
         function(error,data){
             if(error){
