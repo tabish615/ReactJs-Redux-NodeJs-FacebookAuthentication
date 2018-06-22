@@ -49,7 +49,7 @@ itemRouter.route('/add').post(function (req, res) {
 itemRouter.route('/check').post(function (req, res) {
     var abc = new User({name:req.body.name,email:req.body.email,id:req.body.id,picture:req.body.picture})
 
-    abc.findOne({email:req.body.email}, function (error, data) {
+    User.findOne({email:req.body.email}, function (error, data) {
         if (error) {
             console.log(error, 'ERRRRRRRRRRRRRRRRRRRR')
             res.send({error : error})
