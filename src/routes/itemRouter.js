@@ -3,7 +3,7 @@ var app = express();
 var itemRouter = express.Router();
 var axios = require("axios");
 var User = require('../models/User');
- 
+
 itemRouter.route('/').get(function (req, res) {
     console.log(req.headers.asd);
 
@@ -33,33 +33,28 @@ itemRouter.route('/').get(function (req, res) {
 });
 
 itemRouter.route('/add').post(function (req, res) {
-    var user = new User({name:req.body.name,email:req.body.email,id:req.body.id,picture:req.body.picture})
-   console.log(req, '..........................kuch');
-    user.save(
-        function(error,data){
-            if(error){
-                res.send({error:error})
-            }
-            else{
-                res.send({data:data})
-            }
-        })
-})
-
-itemRouter.route('/check').post(function (req, res) {
-    var abc = new User({name:req.body.name,email:req.body.email,id:req.body.id,picture:req.body.picture})
-
-    User.findOne({email:req.body.email}, function (error, data) {
+    var user = new User({ name: req.body.name, email: req.body.email, id: req.body.id, picture: req.body.picture })
+    console.log(req, '..........................kuch');
+    User.findOne({ email: req.body.email }, function (error, data) {
         if (error) {
             console.log(error, 'ERRRRRRRRRRRRRRRRRRRR')
-            res.send({error : error})
+            user.save(
+                function (error, data) {
+                    if (error) {
+                        res.send({ error: error })
+                    }
+                    else {
+                        res.send({ data: data })
+                    }
+                })
         }
-        else{
+        else {
             console.log(data, 'DATTTTTTTTTTTAAAAAAAAA')
-            res.send({data:data})
+            res.send({ data: data })
         }
     })
 })
+
 
 
 module.exports = itemRouter;
