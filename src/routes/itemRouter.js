@@ -36,7 +36,11 @@ itemRouter.route('/add').post(function (req, res) {
     var user = new User({ name: req.body.name, email: req.body.email, id: req.body.id, picture: req.body.picture })
     console.log(req, '..........................kuch');
     User.findOne({ email: req.body.email }, function (error, data) {
-        if (error) {
+        if (data) {
+                console.log(data, 'DATTTTTTTTTTTAAAAAAAAA')
+            res.send({ data: data })
+        }
+        else {
             console.log(error, 'ERRRRRRRRRRRRRRRRRRRR')
             user.save(
                 function (error, data) {
@@ -47,10 +51,6 @@ itemRouter.route('/add').post(function (req, res) {
                         res.send({ data: data })
                     }
                 })
-        }
-        else {
-            console.log(data, 'DATTTTTTTTTTTAAAAAAAAA')
-            res.send({ data: data })
         }
     })
 })
