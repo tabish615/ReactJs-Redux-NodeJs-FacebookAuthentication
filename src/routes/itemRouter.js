@@ -37,7 +37,7 @@ itemRouter.route('/add').post(function (req, res) {
     console.log(req, '..........................kuch');
     User.findOne({ email: req.body.email }, function (error, data) {
         if (data) {
-                console.log(data, 'DATTTTTTTTTTTAAAAAAAAA')
+            console.log(data, 'DATTTTTTTTTTTAAAAAAAAA')
             res.send({ data: data })
         }
         else {
@@ -45,9 +45,11 @@ itemRouter.route('/add').post(function (req, res) {
             user.save(
                 function (error, data) {
                     if (error) {
+                        console.log(error, "iffffffffffffffffffffffffffff")
                         res.send({ error: error })
                     }
                     else {
+                        console.log(data, "elllssssssssssssssssssssssss")
                         res.send({ data: data })
                     }
                 })
