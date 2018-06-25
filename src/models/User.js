@@ -19,6 +19,9 @@ var User = new Schema ({
     picture : {
         type : String,
     },
+    panaCloud_id : {
+        type : String,
+    },
 },{
     collection : "users"
 });
