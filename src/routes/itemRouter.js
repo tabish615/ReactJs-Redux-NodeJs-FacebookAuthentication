@@ -33,7 +33,7 @@ itemRouter.route('/').get(function (req, res) {
 });
 
 itemRouter.route('/add').post(function (req, res) {
-    var user = new User({ name: req.body.name, email: req.body.email, id: req.body.id, picture: req.body.picture, panaCloudId : req.body.panaCloud_id })
+    var user = new User({ name: req.body.name, email: req.body.email, id: req.body.id, picture: req.body.picture, panaCloud_id : req.body.panaCloud_id })
     console.log(req, '..........................kuch');
     User.findOne({ email: req.body.email }, function (error, data) {
         if (data) {
@@ -59,7 +59,7 @@ itemRouter.route('/add').post(function (req, res) {
 
 itemRouter.route('/update').put(function (req, res) {
     console.log(req.body,"bodyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
-    User.findByIdAndUpdate({ _id: req.body.id }, {panacloud_id:req.body.panaCloud_id}).then(function(response){
+    User.findByIdAndUpdate({ _id: req.body.id },req.body.panaCloud_id).then(function(response){
       res.send(response)
         
     }).catch((Err)=>{res.send(Err)})
