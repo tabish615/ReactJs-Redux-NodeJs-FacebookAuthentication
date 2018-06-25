@@ -60,9 +60,9 @@ itemRouter.route('/add').post(function (req, res) {
 itemRouter.route('/update').put(function (req, res) {
     console.log(req.body,"bodyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
     User.findByIdAndUpdate({ _id: req.body.id },req.body.panaCloud_id).then(function(response){
-      res.send(response)
+      res.send({response:response})
         
-    }).catch((Err)=>{res.send(Err)})
+    }).catch((Err)=>{res.send({Error:Err})})
 })
 
 module.exports = itemRouter;
