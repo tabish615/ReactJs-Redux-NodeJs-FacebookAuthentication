@@ -21,6 +21,7 @@ var User = new Schema ({
     },
     panaCloudId : {
         type : String,
+        unique : true
     },
 },{
     collection : "users"
