@@ -3,7 +3,8 @@ import AuthActions from '../actions/authActions';
 function authReducer(state = {
     user: {},
     iserror: false,
-    isLoading : false,
+    isLoading: false,
+    updateError : false
 }, action) {
 
     switch (action.type) {
@@ -32,7 +33,7 @@ function authReducer(state = {
             return {
                 ...state,
                 user: action.data,
-                isLoading : false
+                isLoading: false
             };
             break;
 
@@ -40,7 +41,7 @@ function authReducer(state = {
             return {
                 ...state,
                 iserror: true,
-                isLoading : false
+                isLoading: false
             };
             break;
 
@@ -48,7 +49,8 @@ function authReducer(state = {
             return {
                 ...state,
                 iserror: false,
-                isLoading : true
+                isLoading: true,
+                updateError : false
             };
             break;
 
@@ -56,6 +58,22 @@ function authReducer(state = {
             return {
                 ...state,
                 user: null,
+            };
+            break;
+
+        case AuthActions.updateProfile:
+            return {
+                ...state,
+                user: action.data,
+                isLoading: false
+            };
+            break;
+
+        case AuthActions.updateFailed:
+            return {
+                ...state,
+                isLoading: false,
+                updateError : true
             };
             break;
 

@@ -49,14 +49,13 @@ class AuthMiddleware {
 
                     }).then((responseUser) => {
                         console.log(responseUser)
-                        // dispatch(AuthActions.FbSignin(response.data))
                         responseUser.data.picture=responseUser.data.picture.data.url
-                        axios.post("https://quiz---app.herokuapp.com/user/add",
-                        responseUser.data
-                        ).then((responseAdd)=>{
-                            console.log(responseAdd)
-                            dispatch(AuthActions.FbSignin(responseUser.data))
-                        }).catch(err => { console.log(err) })
+                            axios.post("https://quiz---app.herokuapp.com/user/add",
+                            responseUser.data
+                            ).then((responseAdd)=>{
+                                console.log(responseAdd)
+                                dispatch(AuthActions.FbSignin(responseAdd.data))
+                            }).catch(err => { console.log(err) })
                     }).catch(err => { console.log(err) })
 
                     fetchDataFacebook();
@@ -92,6 +91,22 @@ class AuthMiddleware {
                     dispatch(AuthActions.FbLogout())
                 });
         };
+    }
+
+    static updateprofileMiddleware(data){
+        return dispatch => {
+            axios.put('https://quiz---app.herokuapp.com/user/update',
+            data
+        ).then((response)=> {console.log(response)
+            if(response.data.Error){
+                dispatch(AuthActions.UpdateFailed())
+            }
+            else {
+                dispatch(AuthActions.UpdateProfile({data:response.data.response}))
+            }
+        }
+        ).catch((err)=>console.log(err))
+    }
     }
 }
 

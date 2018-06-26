@@ -8,6 +8,8 @@ class AuthActions {
     static fbSigninFailed = "FB_SIGNIN_FAILED";
     static clearState = "CLEAR_STATE";
     static fbLogout = "FB_LOGOUT";
+    static updateProfile = "UPDATE_PROFILE";
+    static updateFailed = "UPDATE_FAILED";
     
     
     static Signin(data){
@@ -53,6 +55,17 @@ class AuthActions {
         return {
             type : this.fbLogout,
             data : null
+        }
+    }
+    static UpdateProfile(data){
+        return {
+            type : this.updateProfile,
+            data : data
+        }
+    }
+    static UpdateFailed(data){
+        return {
+            type : this.updateFailed,
         }
     }
 }
