@@ -28,7 +28,6 @@ class SignIn extends Component {
         window.fbAsyncInit = function () {
             window.FB.init({
                 appId: 232064780897684,
-                // appSecret : ,
                 cookie: true,
                 xfbml: true,
                 version: 'v3.0'
