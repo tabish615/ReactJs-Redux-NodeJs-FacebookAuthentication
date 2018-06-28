@@ -16,24 +16,25 @@ class SignIn extends Component {
         };
     }
 
-    componentDidMount() {
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+    // componentDidMount() {
+    //     (function (d, s, id) {
+    //         var js, fjs = d.getElementsByTagName(s)[0];
+    //         if (d.getElementById(id)) return;
+    //         js = d.createElement(s); js.id = id;
+    //         js.src = "//connect.facebook.net/en_US/sdk.js";
+    //         fjs.parentNode.insertBefore(js, fjs);
+    //     }(document, 'script', 'facebook-jssdk'));
 
-        window.fbAsyncInit = function () {
-            window.FB.init({
-                appId: 232064780897684,
-                cookie: true,
-                xfbml: true,
-                version: 'v3.0'
-            });
-        };
-    }
+    //     window.fbAsyncInit = function () {
+    //         window.FB.init({
+    //             appId: 232064780897684,
+    //             status : true,
+    //             cookie: true,
+    //             xfbml: true,
+    //             version: 'v3.0'
+    //         });
+    //     };
+    // }
 
     submission(e) {
         if (this.state.email !== "" && this.state.password !== "") {
@@ -71,7 +72,7 @@ class SignIn extends Component {
         console.log(nextprops);
         if (nextprops.user.user) {
             if (nextprops.user.user.data.panaCloudId) {
-                this.props.history.push('/home');
+                this.props.history.push(`/${nextprops.user.user.data.panaCloudId}`);
             }
             else {
                 console.log('else workingggggggggggggggggggggg')

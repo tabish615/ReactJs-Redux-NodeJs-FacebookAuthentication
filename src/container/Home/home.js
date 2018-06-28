@@ -12,10 +12,16 @@ class Home extends Component {
             user: null
         }
     }
+
     componentWillReceiveProps(nextprops) {
         console.log(nextprops);
-        if (!nextprops.state) {
-            this.props.history.push('/');
+        if (nextprops.fbState && nextprops.fbState.user) {
+            this.setState({
+                user: nextprops.fbState.user
+            })
+        }
+        else {
+           this.props.history.push('/');
         }
     }
     componentDidMount() {
@@ -24,8 +30,6 @@ class Home extends Component {
                 user: this.props.fbState.user
             })
         }
-
-
     }
     logout() {
         this.props.logout();
@@ -33,16 +37,16 @@ class Home extends Component {
 
     render() {
         return (
-            <div style={{position:"absolute", left : "40%", top : "30%", textAlign : "center" }}>
-            <div>
-                <img src={this.state.user ? this.state.user.data.picture : ""} />
-                <hr />
-                <h2>
-                    Welcome, {this.state.user ? this.state.user.data.name : ""}!
+            <div style={{ position: "absolute", left: "40%", top: "30%", textAlign: "center" }}>
+                <div>
+                    <img src={this.state.user ? this.state.user.data.picture : ""} />
+                    <hr />
+                    <h2>
+                        Welcome, {this.state.user ? this.state.user.data.name : ""}!
                 </h2>
-                <p>Email : {this.state.user ? this.state.user.data.email : ""}</p>
-                {/* <button onClick={this.logout.bind(this)}>Logout</button> */}
-                <button onClick={() => this.props.fblogout()}>Logout</button>
+                    <p>Email : {this.state.user ? this.state.user.data.email : ""}</p>
+                    {/* <button onClick={this.logout.bind(this)}>Logout</button> */}
+                    <button onClick={() => this.props.fblogout()}>Logout</button>
                 </div>
             </div>
         );
@@ -53,7 +57,9 @@ function mapStateToProps(state) {
     console.log(state);
     return {
         state: state.authReducer,
-        fbState: state
+        fbState: state,
+        loader: state.isLoading,
+
     };
 }
 

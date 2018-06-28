@@ -9,8 +9,35 @@ import SignIn from './container/SignIn/signin';
 import SignUp from './container/SignUp/signup';
 import SignBtn from './container/SignBtn/signbtn';
 import Home from './container/Home/home';
+import { connect } from 'react-redux';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.clearstate(); 
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    window.fbAsyncInit = () => {
+      window.FB.init({
+        appId: 232064780897684,
+        status: true,
+        cookie: true,
+        xfbml: true,
+        version: 'v3.0'
+      });
+      window.FB.getLoginStatus((res) => {
+        console.log(res)
+          this.props.token(res);
+      })
+      window.FB.Event.subscribe('auth.statusChange');
+    };
+  }
+
   render() {
     return (
       <Router>
@@ -22,11 +49,30 @@ class App extends Component {
           </div>
           <Route exact path="/" component={SignIn} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/home" component={Home} />
+          <Route path="/:id" component={Home} />
         </div>
       </Router>
     );
   }
 }
+function mapStateToProps(state) {
+  console.log(state);
+  return {
+    user: state,
+    error: state.iserror,
+    loader: state.isLoading,
+    update_error: state.updateError
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    fbsignin: () => { dispatch(AuthMiddleware.fbsigninMiddleware()) },
+    clearstate: () => { dispatch(AuthActions.ClearState()) },
+    updateprofile: (data) => { dispatch(AuthMiddleware.updateprofileMiddleware(data)) },
+    token: (response) => { dispatch(AuthMiddleware.accessTokenMiddleware(response)) }
 
-export default App;
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
