@@ -59,18 +59,13 @@ function mapStateToProps(state) {
   console.log(state);
   return {
     user: state,
-    error: state.iserror,
     loader: state.isLoading,
-    update_error: state.updateError
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    fbsignin: () => { dispatch(AuthMiddleware.fbsigninMiddleware()) },
     clearstate: () => { dispatch(AuthActions.ClearState()) },
-    updateprofile: (data) => { dispatch(AuthMiddleware.updateprofileMiddleware(data)) },
     token: (response) => { dispatch(AuthMiddleware.accessTokenMiddleware(response)) }
-
   };
 }
 
